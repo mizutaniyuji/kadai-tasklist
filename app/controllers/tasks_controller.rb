@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+     @tasks = Task.all.page(params[:page]).per(10)
   end
 
   def show
@@ -50,6 +50,6 @@ class TasksController < ApplicationController
   
     # Strong Parameter
   def task_params
-    params.require(:task).permit(:content)
+    params.require(:task).permit(:content, :status)
   end
 end
