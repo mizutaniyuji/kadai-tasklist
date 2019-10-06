@@ -5,6 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-(1..50).each do |number|
-  Task.create(content: "task example" + number.to_s, status: number.to_s+"%")
+
+(1..26).each do |number|
+  User.create(name: "テックちゃん" + number.to_s + "号", email: "testemail" + number.to_s + "@Techacademy.jp", password: "testpassword" + number.to_s)
+end
+
+first_id = User.first.id
+last_id = User.last.id
+i = 0
+
+while first_id + i <= last_id
+  (1..26).each do |number|
+    User.find(first_id + i).tasks.create(content: "task example" + number.to_s, status: number.to_s+"%")
+  end
+  i += 1
 end

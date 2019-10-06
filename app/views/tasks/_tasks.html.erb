@@ -1,0 +1,21 @@
+<ul class="list-unstyled">
+  <% tasks.each do |task| %>
+    <li class="media mb-3">
+      <div class="media-body">
+        <div>
+          作成者: <%= link_to task.user.name, user_path(task.user) %>, <span class="text-muted">進捗率: <%= task.status %></span>
+        </div>
+        <div>
+          <p><%= task.content %></p>
+        </div>
+        <div>
+          <% if current_user == task.user %>
+            <%= link_to "Delete", task, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+            <%= link_to 'Edit', edit_task_path(task) %>
+          <% end %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  <%= paginate tasks %>
+</ul>

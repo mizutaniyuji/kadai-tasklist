@@ -1,0 +1,21 @@
+<div class="row">
+    <% if current_user == @user %>
+    <%= link_to("Task Addition", new_task_path) %>
+    <% end %>
+    <%= link_to("Task List", tasks_path) %>
+    <%= link_to 'Logout', logout_path, method: :delete %>
+  <aside class="col-sm-6">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">User Name: <%= @user.name %></h2>
+      </div>
+      <div class="card-body">
+        <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 400 }) %>" alt="">
+      </div>
+    </div>
+  </aside>
+  <div class="col-sm-6">
+    <h2>Number of Tasks: <%= @count_tasks %></h2>
+    <%= render 'tasks/tasks', tasks: @tasks %>
+  </div>
+</div>

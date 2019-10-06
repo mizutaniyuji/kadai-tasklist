@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
+  before_action :require_user_logged_in, only: [:index, :show]
+  before_action :current_user, only: [:destroy]
+  
   def index
-     @tasks = Task.all.page(params[:page]).per(10)
+     @task = current_user.tasks.build  # form_with 用
+     @tasks = current_user.tasks.order(id: :desc).page(params[:page])
   end
 
   def show
@@ -9,6 +13,10 @@ class TasksController < ApplicationController
 
   def new
       @task = Task.new
+  end
+  
+  def edit
+    @task = Task.find(params[:id])
   end
 
   def create
