@@ -1,7 +1,6 @@
 <% if logged_in? %>
   <p>ログイン完了ユーザ: <%= current_user.name %></p>
     <%= link_to("Task Addition", new_task_path) %>
-    <%= link_to("User List", users_path) %>
     <%= link_to 'Logout', logout_path, method: :delete %>
 
 <% else %>
